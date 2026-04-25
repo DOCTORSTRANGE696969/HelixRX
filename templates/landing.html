@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Helix for Health - Decoding the Future of Pharmacogenomics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Outfit", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                blue: "#1a56db",
+                dark: "#030712",
+                light: "#f8fafc",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Outfit", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900"
+  >
+    <!-- Navbar -->
+    <nav
+      class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-hourglass-half text-brand-blue text-xl"></i>
+            <span
+              class="font-display font-bold text-xl tracking-tight text-slate-900"
+              >Helix
+              <span class="font-normal text-slate-500">for Health</span></span
+            >
+          </div>
+
+          <!-- Removed navigation links per request -->
+
+          <div>
+            <a
+              href="/console"
+              class="bg-brand-blue hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold shadow-sm shadow-blue-500/30 transition-all flex items-center gap-2"
+            >
+              <i class="fa-solid fa-microscope"></i>
+              Launch Console
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section (Dark) -->
+    <section
+      class="bg-[#030712] pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div class="max-w-2xl">
+            <div
+              class="inline-block px-3 py-1 rounded-full bg-blue-900/30 border border-blue-800/50 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6"
+            >
+              Precision Medicine AI
+            </div>
+            <h1
+              class="text-5xl lg:text-7xl font-display font-bold text-white leading-[1.1] mb-6"
+            >
+              Decoding the Future of Pharmacogenomics with HelixHealth
+            </h1>
+            <p class="text-lg text-slate-400 mb-10 leading-relaxed max-w-xl">
+              Our platform integrates advanced genomic sequencing with
+              context-aware AI to deliver personalized medication pathways. By
+              mapping ancestral markers and metabolic efficacy, HelixHealth
+              ensures safer, more effective treatments for every individual.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mb-12">
+              <div
+                class="flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300"
+              >
+                <i class="fa-solid fa-microchip text-blue-400"></i> Contextual
+                LLM Analysis
+              </div>
+              <div
+                class="flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-2.5 text-sm font-medium text-slate-300"
+              >
+                <i class="fa-solid fa-dna text-blue-400"></i> Genomic Variant
+                Tracking
+              </div>
+            </div>
+
+            <a
+              href="/console"
+              class="inline-flex items-center justify-between gap-4 bg-white text-slate-900 px-6 py-4 rounded-xl font-bold hover:bg-slate-100 transition-colors w-max"
+            >
+              Launch Helix Console
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
+
+    <!-- The Molecular Mapping Engine -->
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2
+            class="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6"
+          >
+            The Molecular Mapping Engine
+          </h2>
+          <p class="text-lg text-slate-600">
+            Watch how HelixHealth synchronizes genomic sequences with clinical
+            pharmacogenomics to predict real-world drug responses.
+          </p>
+        </div>
+
+        <!-- Process flow UI -->
+        <div
+          class="relative flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 mb-20 py-10"
+        >
+          <!-- Connector Line -->
+          <div
+            class="hidden md:block absolute top-1/2 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-100 via-blue-200 to-blue-100 -z-10"
+          ></div>
+
+          <!-- Card 1 -->
+          <div
+            class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 p-8 w-64 text-center transform transition-transform hover:-translate-y-2"
+          >
+            <div
+              class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-brand-blue mb-6 border border-blue-100 border-dashed"
+            >
+              <i class="fa-solid fa-dna text-2xl"></i>
+            </div>
+            <p
+              class="text-xs font-bold uppercase tracking-wider text-brand-blue mb-2"
+            >
+              Genotype
+            </p>
+            <p class="text-lg font-display font-bold text-slate-800">
+              rs12248560
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="bg-white rounded-[2rem] shadow-2xl shadow-blue-500/10 border border-blue-100 p-10 w-72 text-center transform scale-105 z-10 transition-transform hover:-translate-y-2"
+          >
+            <div
+              class="w-20 h-20 mx-auto bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-500/30"
+            >
+              <i class="fa-solid fa-microscope text-3xl"></i>
+            </div>
+            <p
+              class="text-xs font-bold uppercase tracking-wider text-brand-blue mb-2"
+            >
+              Gene Map
+            </p>
+            <p class="text-xl font-display font-bold text-slate-800">
+              CYP2C19 *1/*17
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 p-8 w-64 text-center transform transition-transform hover:-translate-y-2"
+          >
+            <div
+              class="w-16 h-16 mx-auto bg-blue-50 rounded-2xl flex items-center justify-center text-brand-blue mb-6 border border-blue-100 border-dashed"
+            >
+              <i class="fa-solid fa-capsules text-2xl"></i>
+            </div>
+            <p
+              class="text-xs font-bold uppercase tracking-wider text-brand-blue mb-2"
+            >
+              Phenotype
+            </p>
+            <p class="text-lg font-display font-bold text-slate-800">
+              Ultra-Rapid
+            </p>
+          </div>
+        </div>
+
+        <!-- Features 3 col -->
+        <div
+          class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto border-t border-slate-100 pt-16"
+        >
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 mb-3">
+              Sequence Analysis
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Identifying critical SNPs and Indels from raw VCF data with 99.9%
+              accuracy.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 mb-3">
+              Translation Core
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Mapping variants to metabolic star-alleles using CPIC industry
+              standards.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 mb-3">
+              Clinical Impact
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Generating actionable dosage insights synchronized with
+              population-specific context.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Advancing Precision Medicine -->
+    <section class="py-24 bg-slate-50 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="max-w-xl">
+            <h2
+              class="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6 leading-tight"
+            >
+              Advancing precision medicine for everyone.
+            </h2>
+            <p class="text-lg text-slate-600 mb-10 leading-relaxed">
+              Our work is driven by a simple yet powerful mission: harness
+              advanced AI, pharmacogenomics, and contextual Indigenous Knowledge
+              mapping to help everyone, everywhere receive the safest and most
+              effective personalized dosages.
+            </p>
+            <button
+              class="bg-brand-blue hover:bg-blue-700 text-white px-8 py-3.5 rounded-xl text-base font-bold shadow-md shadow-blue-500/20 transition-all"
+            >
+              Explore the Platform
+            </button>
+          </div>
+
+          <div class="relative h-[500px]">
+            <!-- Collage of images -->
+            <div
+              class="absolute right-0 top-1/2 -translate-y-1/2 w-[80%] h-[60%] rounded-3xl overflow-hidden shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover"
+                alt="Lab vials"
+              />
+            </div>
+            <div
+              class="absolute right-[60%] top-1/4 w-[40%] h-[30%] rounded-2xl overflow-hidden shadow-xl border-4 border-slate-50"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover"
+                alt="Surgery"
+              />
+            </div>
+            <div
+              class="absolute left-10 bottom-10 w-[45%] h-[35%] rounded-2xl overflow-hidden shadow-xl border-4 border-slate-50 z-10"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover"
+                alt="Doctor typing"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Pill Navigation -->
+        <div class="mt-24 flex justify-center">
+          <div
+            class="inline-flex flex-wrap items-center justify-center gap-4 md:gap-8 bg-white border border-slate-200 rounded-full px-8 py-4 shadow-sm text-sm font-medium text-slate-600"
+          >
+            <span class="hover:text-brand-blue cursor-pointer"
+              >Meeting clinicians where they are</span
+            >
+            <span class="text-slate-300 hidden md:block">|</span>
+            <span class="hover:text-brand-blue cursor-pointer"
+              >Advancing cutting-edge AI capabilities</span
+            >
+            <span class="text-slate-300 hidden md:block">|</span>
+            <span class="hover:text-brand-blue cursor-pointer"
+              >Transforming organizations</span
+            >
+            <span class="text-slate-300 hidden md:block">|</span>
+            <span class="hover:text-brand-blue cursor-pointer"
+              >Fostering ethical health ecosystems</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cutting Edge AI -->
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-end gap-8 mb-16"
+        >
+          <h2
+            class="text-4xl md:text-5xl font-display font-bold text-slate-900 max-w-lg leading-tight"
+          >
+            Advancing cutting-edge AI capabilities
+          </h2>
+          <p class="text-slate-600 max-w-md text-lg">
+            Our advanced AI models analyze genomic structures, generating novel
+            insights and developing highly personalized safety solutions.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Card 1 -->
+          <div class="group cursor-pointer">
+            <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden mb-6">
+              <img
+                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                alt="Code"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-4 max-w-sm">
+              See how our conversational medical AI research is driving the art
+              of the possible
+            </h3>
+            <span
+              class="text-brand-blue font-semibold text-sm group-hover:underline"
+              >Learn more</span
+            >
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group cursor-pointer">
+            <div class="w-full h-64 md:h-80 rounded-3xl overflow-hidden mb-6">
+              <img
+                src="https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                alt="X-ray"
+              />
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-4 max-w-sm">
+              Explore how HelixRX is accelerating breakthroughs in Traditional
+              Knowledge mapping
+            </h3>
+            <span
+              class="text-brand-blue font-semibold text-sm group-hover:underline"
+              >Learn more</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Health -->
+    <section class="py-24 bg-slate-50 border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-slate-900 mb-12"
+        >
+          See our most recent work in global health
+        </h2>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button
+            class="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md text-slate-700 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 transition-all"
+          >
+            <i class="fa-solid fa-globe text-slate-400"></i> Global Health
+          </button>
+          <button
+            class="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md text-slate-700 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 transition-all"
+          >
+            <i class="fa-solid fa-flask text-slate-400"></i> Genomics Org
+          </button>
+          <button
+            class="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md text-slate-700 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 transition-all"
+          >
+            <i class="fa-solid fa-leaf text-slate-400"></i> TK Research
+          </button>
+          <button
+            class="bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md text-slate-700 px-6 py-4 rounded-xl font-semibold flex items-center gap-3 transition-all"
+          >
+            <i class="fa-solid fa-database text-slate-400"></i> BioData Init
+          </button>
+        </div>
+
+        <button
+          class="inline-flex items-center gap-2 px-6 py-2 border border-slate-300 rounded-full text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors"
+        >
+          Access Platform
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-12">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center"
+      >
+        <div class="flex items-center gap-2 mb-4 md:mb-0">
+          <i class="fa-solid fa-hourglass-half text-brand-blue"></i>
+          <span class="font-display font-bold text-slate-900"
+            >Helix for Health</span
+          >
+        </div>
+        <p class="text-sm text-slate-500">
+          © 2026 HelixHealth Technologies. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

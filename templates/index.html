@@ -333,8 +333,8 @@
 
     </div>
 
-    <!-- The exact script reference from original -->
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <!-- The exact script reference from original, with cache buster -->
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.0"></script>
     
     <!-- Inline script to handle file name display, standard tabs visual logic that was added -->
     <script>
