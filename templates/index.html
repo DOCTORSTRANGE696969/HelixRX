@@ -60,7 +60,7 @@
       .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
       .hidden { display: none !important; }
       
-      body { background-color: var(--bg-body); color: var(--text-primary); transition: background-color 0.3s ease, color 0.3s ease; }
+      body { background-color: transparent; color: var(--text-primary); transition: background-color 0.3s ease, color 0.3s ease; }
       .bg-white { background-color: var(--bg-card) !important; }
       .bg-slate-50 { background-color: rgba(0,0,0,0.02) !important; }
       body.dark .bg-slate-50 { background-color: rgba(255,255,255,0.02) !important; }
@@ -96,9 +96,31 @@
       .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
       input:checked + .slider { background-color: var(--accent-blue); }
       input:checked + .slider:before { transform: translateX(20px); }
+
+      /* Background Decoration */
+      @keyframes blob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -50px) scale(1.1); }
+        66% { transform: translate(-20px, 20px) scale(0.9); }
+      }
+      .animate-blob {
+        animation: blob 15s infinite alternate ease-in-out;
+      }
+      .animation-delay-2000 { animation-delay: 2s; }
+      .animation-delay-4000 { animation-delay: 4s; }
     </style>
   </head>
-  <body class="text-slate-800 font-sans h-screen w-full flex overflow-hidden">
+  <body class="text-slate-800 font-sans h-screen w-full flex overflow-hidden relative">
+    
+    <!-- BACKGROUND DECORATION -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden" style="background-color: var(--bg-body);">
+      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-400/20 rounded-full blur-[120px] animate-blob"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-emerald-400/15 rounded-full blur-[120px] animate-blob animation-delay-2000"></div>
+      <div class="absolute top-[30%] right-[5%] w-[40%] h-[40%] bg-indigo-400/15 rounded-full blur-[120px] animate-blob animation-delay-4000"></div>
+      
+      <!-- Subtle Grid Overlay -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+    </div>
     
     <!-- Left Sidebar -->
     <aside class="w-[260px] h-full flex flex-col px-6 py-8">
