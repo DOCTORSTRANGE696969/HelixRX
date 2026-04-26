@@ -20,6 +20,7 @@ import re
 load_dotenv()
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 def archive_vcf_upload(file_bytes, original_filename, request_id):
