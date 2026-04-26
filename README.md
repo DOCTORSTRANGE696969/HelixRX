@@ -1,5 +1,7 @@
 # HelixRx
 
+Live url: https://helixrx-bff6c.web.app/
+
 ## Problem Understanding
 Adverse drug reactions (ADRs) are a major healthcare challenge, often caused by differences in how individuals metabolize drugs based on their genetic makeup. Despite the availability of pharmacogenomic data, it is rarely used in clinical practice due to the complexity of interpreting genomic information and lack of accessible tools.
 

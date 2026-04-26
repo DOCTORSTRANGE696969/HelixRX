@@ -32,18 +32,70 @@
       };
     </script>
     <style>
+      :root {
+        --bg-body: #f4f7fb;
+        --bg-card: #ffffff;
+        --bg-sidebar: transparent;
+        --border-color: #DFE1E6;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --text-muted: #94a3b8;
+        --accent-blue: #0052CC;
+        --accent-green: #00A389;
+      }
+      
+      body.dark {
+        --bg-body: #0f172a;
+        --bg-card: #1e293b;
+        --border-color: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #64748b;
+        --accent-blue: #3b82f6;
+        --accent-green: #10b981;
+      }
+
       .custom-scrollbar::-webkit-scrollbar { width: 6px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
       .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
       .hidden { display: none !important; }
-      body { background-color: #f4f7fb; }
-      .nav-item.active { background-color: #ffffff; color: #2563eb; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-radius: 4px; }
-      .dashed-box { border: 2px dashed #a7f3d0; background: #f8fafc; border-radius: 1.5rem; transition: all 0.3s ease; }
-      .dashed-box:hover { border-color: #10b981; background: #ecfdf5; }
-      .tab-button.active { background-color: #f1f5f9; color: #1e293b; font-weight: 600; border-radius: 0.5rem; }
-      .bar-graph-col { border-radius: 4px 4px 0 0; background: #60a5fa; }
-      .bar-graph-col:nth-child(even) { background: #93c5fd; }
-      .bar-graph-col.active { background: #3b82f6; }
+      
+      body { background-color: var(--bg-body); color: var(--text-primary); transition: background-color 0.3s ease, color 0.3s ease; }
+      .bg-white { background-color: var(--bg-card) !important; }
+      .bg-slate-50 { background-color: rgba(0,0,0,0.02) !important; }
+      body.dark .bg-slate-50 { background-color: rgba(255,255,255,0.02) !important; }
+      .bg-slate-50\/50 { background-color: rgba(0,0,0,0.01) !important; }
+      
+      .border-[#DFE1E6], .border-slate-100, .border-slate-200 { border-color: var(--border-color) !important; }
+      .text-slate-800 { color: var(--text-primary) !important; }
+      .text-slate-700, .text-slate-600 { color: var(--text-secondary) !important; }
+      .text-slate-500, .text-slate-400 { color: var(--text-muted) !important; }
+      
+      .nav-item.active { background-color: var(--bg-card); color: var(--accent-blue); font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-radius: 4px; }
+      .dashed-box { border: 2px dashed var(--accent-green); background: var(--bg-body); border-radius: 1.5rem; transition: all 0.3s ease; }
+      .tab-button.active { background-color: var(--bg-body); color: var(--text-primary); font-weight: 600; border-radius: 0.5rem; }
+      
+      /* New Animations */
+      .fade-in { animation: fadeIn 0.3s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+      
+      .progress-bar-fill { transition: width 0.5s ease-out; }
+      
+      .result-view { display: none; }
+      .result-view.active { display: flex; animation: fadeIn 0.4s ease-out; }
+      
+      .nav-item { transition: all 0.2s ease-in-out; }
+      .nav-item:hover:not(.active) { background-color: rgba(255, 255, 255, 0.1); transform: translateX(3px); }
+      
+      .tab-toggle.active { background-color: var(--bg-card); color: var(--text-primary); border-color: var(--border-color); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+      /* Toggle Switch */
+      .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 20px; }
+      .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+      input:checked + .slider { background-color: var(--accent-blue); }
+      input:checked + .slider:before { transform: translateX(20px); }
     </style>
   </head>
   <body class="text-slate-800 font-sans h-screen w-full flex overflow-hidden">
@@ -67,9 +119,8 @@
         <ul class="flex flex-col gap-2" id="sidebar-nav">
           <li><a href="#" class="nav-item active flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-chart-pie w-5 text-center"></i> Overview</a></li>
           <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-vial w-5 text-center"></i> Sequences</a></li>
-          <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-diagram-project w-5 text-center"></i> Molecular Mapping</a></li>
-          <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-clipboard-list w-5 text-center"></i> History</a></li>
-          <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all mt-4"><i class="fa-solid fa-gear w-5 text-center"></i> Settings</a></li>
+          <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-diagram-project w-5 text-center"></i> System Workflow</a></li>
+          <li><a href="#" class="nav-item flex items-center gap-3 px-5 py-3 text-sm text-slate-600 hover:text-slate-800 transition-all"><i class="fa-solid fa-gear w-5 text-center"></i> Settings</a></li>
         </ul>
       </nav>
 
@@ -108,8 +159,10 @@
         </header>
 
         <!-- Scrollable Dashboard Body -->
-        <div class="flex-1 overflow-auto custom-scrollbar p-6 bg-slate-50/50">
-          <div class="flex flex-col xl:flex-row gap-6 mb-6">
+        <div class="flex-1 overflow-auto custom-scrollbar p-6 bg-slate-50/50 relative">
+          <!-- SECTION: Overview -->
+          <div id="section-overview" class="app-section">
+            <div class="flex flex-col xl:flex-row gap-6 mb-6">
             
             <!-- Left Panel (Genomic Context) -->
             <div class="w-full xl:w-[380px] bg-white rounded-lg p-6  border border-[#DFE1E6] flex flex-col">
@@ -155,9 +208,20 @@
               </div>
 
               <!-- Action Button -->
-              <button id="run-analysis-btn" class="w-full bg-[#0052CC] hover:bg-blue-700 text-white font-bold text-xs tracking-widest py-3.5 rounded  transition-all transform hover:-translate-y-0.5 mt-auto">
-                EXECUTE SCAN
-              </button>
+              <div class="mt-auto flex flex-col gap-3">
+                <div id="analysis-progress-container" class="hidden">
+                  <div class="flex justify-between text-[10px] font-bold text-slate-500 uppercase mb-1">
+                    <span>Analyzing...</span>
+                    <span id="analysis-progress-text">0%</span>
+                  </div>
+                  <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                    <div id="analysis-progress-bar" class="progress-bar-fill h-full bg-[#0052CC]" style="width: 0%"></div>
+                  </div>
+                </div>
+                <button id="run-analysis-btn" class="w-full bg-[#0052CC] hover:bg-blue-700 text-white font-bold text-xs tracking-widest py-3.5 rounded transition-all transform hover:-translate-y-0.5">
+                  EXECUTE SCAN
+                </button>
+              </div>
             </div>
 
             <!-- Right Panel (Results & Metrics) -->
@@ -188,17 +252,17 @@
                   </div>
 
                   <!-- View Toggles -->
-                  <div class="flex gap-1 p-1 rounded bg-slate-50 border border-[#DFE1E6] self-start mt-4 sm:mt-0">
-                    <button id="toggle-genomic" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-white text-slate-800  border border-[#DFE1E6]">VCF Health</button>
-                    <button class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Genomic Core</button>
-                    <button class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Molecular Mapping</button>
-                    <button id="toggle-clinical" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Clinical Action</button>
+                  <div class="flex gap-1 p-1 rounded bg-slate-50 border border-[#DFE1E6] self-start mt-4 sm:mt-0" id="result-view-toggles">
+                    <button data-view="genomic-view" class="tab-toggle px-4 py-1.5 rounded-lg text-xs font-bold active">VCF Health</button>
+                    <button data-view="core-view" class="tab-toggle px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Genomic Core</button>
+                     <button data-view="mapping-view" class="tab-toggle px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Validation Workflow</button>
+                    <button data-view="clinical-view" class="tab-toggle px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-700">Clinical Action</button>
                   </div>
                   <button id="download-report-btn" class="hidden absolute top-6 right-6 text-slate-400 hover:text-[#0052CC]"><i class="fa-solid fa-download"></i></button>
                 </div>
 
                 <!-- Genomic View (VCF Integrity) -->
-                <div id="genomic-view" class="flex-grow flex flex-col">
+                <div id="genomic-view" class="result-view flex-grow flex flex-col">
                   <h3 class="text-sm font-bold text-slate-800 mb-4">VCF Integrity Metrics</h3>
                   
                   <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -255,8 +319,157 @@
                   </div>
                 </div>
 
+                <!-- Genomic Core View -->
+                <div id="core-view" class="result-view hidden flex-grow flex flex-col">
+                  <div class="mb-6">
+                    <h3 class="text-sm font-bold text-slate-800">Genomic Core Metrics</h3>
+                    <p class="text-[11px] text-slate-500">Foundational variant data extracted from the VCF sequence.</p>
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-slate-50 border border-[#DFE1E6] rounded p-4">
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Primary Gene</p>
+                      <div class="flex items-center gap-2">
+                        <span id="core-gene-name" class="text-lg font-display font-bold text-slate-800">CYP2C19</span>
+                        <span class="px-1.5 py-0.5 bg-blue-50 text-[#0052CC] text-[9px] font-bold rounded">PHARMGKB</span>
+                      </div>
+                    </div>
+                    <div class="bg-slate-50 border border-[#DFE1E6] rounded p-4">
+                      <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Genotype Call</p>
+                      <span id="core-genotype-call" class="text-lg font-display font-bold text-[#0052CC]">*1 / *17</span>
+                    </div>
+                  </div>
+
+                  <!-- Variant Detail Table -->
+                  <div class="bg-white border border-[#DFE1E6] rounded-lg overflow-hidden mb-6">
+                    <table class="w-full text-left text-[11px]">
+                      <thead class="bg-slate-50 border-b border-[#DFE1E6] text-slate-400 font-bold uppercase tracking-tighter">
+                        <tr>
+                          <th class="px-4 py-2">Variant ID (RSID)</th>
+                          <th class="px-4 py-2">Location</th>
+                          <th class="px-4 py-2">Allele</th>
+                          <th class="px-4 py-2 text-right">Qual</th>
+                        </tr>
+                      </thead>
+                      <tbody class="divide-y divide-slate-100">
+                        <tr>
+                          <td class="px-4 py-3 font-mono text-slate-700">rs12248560</td>
+                          <td class="px-4 py-3">chr10:94762737</td>
+                          <td class="px-4 py-3"><span class="font-bold">C</span> > <span class="text-[#0052CC] font-bold">T</span></td>
+                          <td class="px-4 py-3 text-right text-emerald-600 font-bold">99.8</td>
+                        </tr>
+                        <tr>
+                          <td class="px-4 py-3 font-mono text-slate-700">rs12248561</td>
+                          <td class="px-4 py-3">chr10:94762738</td>
+                          <td class="px-4 py-3"><span class="font-bold">G</span> > <span class="text-slate-400 font-bold">G</span></td>
+                          <td class="px-4 py-3 text-right text-emerald-600 font-bold">99.9</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <!-- Quality Summary -->
+                  <div class="p-4 bg-emerald-50/50 border border-emerald-100 rounded-lg flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
+                      <i class="fa-solid fa-microscope text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-bold text-slate-800">Variant Call Accuracy: High</h4>
+                      <p class="text-[10px] text-slate-600">The variants were called with a mean Q-score of 34.2 (99.9% accuracy). No low-complexity regions detected in target loci.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- System Workflow View -->
+                <div id="mapping-view" class="result-view hidden flex-grow flex flex-col">
+                  <div class="flex items-center justify-between mb-6">
+                    <div>
+                      <h3 class="text-sm font-bold text-slate-800">Validation Pipeline</h3>
+                      <p class="text-[11px] text-slate-500">Real-time trace of the current genomic analysis journey.</p>
+                    </div>
+                    <div class="px-2 py-1 bg-emerald-50 rounded border border-emerald-100 flex items-center gap-2">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                      <span class="text-[10px] font-bold text-emerald-700 uppercase">Analysis Complete</span>
+                    </div>
+                  </div>
+
+                  <div class="bg-slate-50 border border-[#DFE1E6] rounded-xl p-8 relative overflow-hidden">
+                    <!-- The Flow Line -->
+                    <div class="absolute top-1/2 left-12 right-12 h-px bg-slate-200 -translate-y-1/2 z-0"></div>
+                    
+                    <div class="flex justify-between items-center relative z-10">
+                      <!-- Step 1: Ingestion -->
+                      <div class="flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-[#0052CC] shadow-sm flex items-center justify-center text-[#0052CC]">
+                          <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-xs font-bold text-slate-800">Ingestion</p>
+                          <p class="text-[9px] text-slate-500 font-mono">VCF PARSED</p>
+                        </div>
+                      </div>
+
+                      <!-- Step 2: Hashing -->
+                      <div class="flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-[#0052CC] shadow-sm flex items-center justify-center text-[#0052CC]">
+                          <i class="fa-solid fa-fingerprint text-lg"></i>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-xs font-bold text-slate-800">Pseudonymize</p>
+                          <p class="text-[9px] text-slate-500 font-mono">SHA-256 ACTIVE</p>
+                        </div>
+                      </div>
+
+                      <!-- Step 3: Analysis -->
+                      <div class="flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-[#0052CC] shadow-sm flex items-center justify-center text-[#0052CC]">
+                          <i class="fa-solid fa-brain text-lg"></i>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-xs font-bold text-slate-800">Intelligence</p>
+                          <p class="text-[9px] text-slate-500 font-mono">LLM CROSS-REF</p>
+                        </div>
+                      </div>
+
+                      <!-- Step 4: Finalize -->
+                      <div class="flex flex-col items-center gap-3">
+                        <div class="w-12 h-12 rounded-full bg-[#00A389] border-2 border-[#00A389] shadow-[0_0_15px_rgba(0,163,137,0.3)] flex items-center justify-center text-white">
+                          <i class="fa-solid fa-circle-check text-lg"></i>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-xs font-bold text-slate-800">Finalized</p>
+                          <p class="text-[9px] text-emerald-600 font-bold font-mono">REPORT READY</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Background Decoration -->
+                    <div class="absolute -bottom-6 -right-6 opacity-[0.03] pointer-events-none">
+                      <i class="fa-solid fa-dna text-[120px] rotate-12"></i>
+                    </div>
+                  </div>
+
+                  <!-- Technical Details Footer -->
+                  <div class="mt-6 grid grid-cols-2 gap-4">
+                    <div class="p-3 bg-white border border-[#DFE1E6] rounded flex items-center gap-3">
+                       <i class="fa-solid fa-shield-halved text-slate-400 text-sm"></i>
+                       <div>
+                         <p class="text-[10px] font-bold text-slate-800 uppercase">HIPAA Compliance</p>
+                         <p class="text-[9px] text-slate-500">Zero-knowledge proof architecture</p>
+                       </div>
+                    </div>
+                    <div class="p-3 bg-white border border-[#DFE1E6] rounded flex items-center gap-3">
+                       <i class="fa-solid fa-server text-slate-400 text-sm"></i>
+                       <div>
+                         <p class="text-[10px] font-bold text-slate-800 uppercase">Compute Latency</p>
+                         <p class="text-[9px] text-slate-500">Analysis completed in 1.2s</p>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Clinical View -->
-                <div id="clinical-view" class="hidden flex-grow flex flex-col">
+                <div id="clinical-view" class="result-view hidden flex-grow flex flex-col">
                   <h3 class="text-sm font-bold text-slate-800 mb-4">Clinical Action</h3>
                   <div class="grid grid-cols-2 gap-4">
                     <div class="bg-slate-50 border border-[#DFE1E6] rounded p-4">
@@ -281,73 +494,296 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- Bottom: Genomic Intelligence Dashboard -->
-          <div class="bg-white rounded-lg p-6  border border-[#DFE1E6]">
-            <div class="flex justify-between items-center border-b border-[#DFE1E6] pb-4 mb-4">
-              <div class="flex items-center gap-2">
-                <i class="fa-solid fa-chart-simple text-[#0052CC]"></i>
-                <h3 class="text-xs font-bold text-slate-800 uppercase tracking-widest">Genomic Intelligence Dashboard</h3>
-              </div>
-              <span class="text-xs text-slate-500">Last Scan (Auto-updating) <i class="fa-solid fa-chevron-down text-[10px] ml-1"></i></span>
+        <!-- SECTION: Sequences -->
+        <div id="section-sequences" class="app-section hidden h-full flex flex-col p-8 overflow-y-auto custom-scrollbar">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div>
+              <h3 class="text-2xl font-display font-bold text-slate-800">Sequence Library</h3>
+              <p class="text-sm text-slate-500 mt-1">Total 124 curated sequences available for analysis.</p>
             </div>
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input type="text" id="sequence-search" placeholder="Search sequences..." class="pl-9 pr-4 py-2 bg-white border border-[#DFE1E6] rounded text-sm focus:ring-1 focus:ring-[#0052CC] focus:border-[#0052CC] outline-none w-64">
+              </div>
+              <button id="upload-new-btn" class="px-4 py-2 bg-[#0052CC] text-white text-sm font-bold rounded hover:bg-blue-700 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-upload"></i>
+                UPLOAD NEW
+              </button>
+            </div>
+          </div>
+
+          <!-- Sequence List -->
+          <div class="bg-white border border-[#DFE1E6] rounded-xl overflow-hidden">
+            <table class="w-full text-left border-collapse" id="sequence-table">
+              <thead>
+                <tr class="bg-slate-50 border-b border-[#DFE1E6]">
+                  <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sequence Name</th>
+                  <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Type</th>
+                  <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Upload Date</th>
+                  <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</th>
+                  <th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#DFE1E6]">
+                <!-- Sample Row 1 -->
+                <tr class="sequence-row hover:bg-slate-50/50 transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded bg-blue-50 text-[#0052CC] flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-file-dna"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-bold text-slate-800">patient_hx_8821.vcf</p>
+                        <p class="text-[10px] text-slate-500">SHA-256: 8a3f...d921</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Whole Exome</span></td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Apr 24, 2026</span></td>
+                  <td class="px-6 py-4">
+                    <span class="px-2 py-1 bg-emerald-50 text-[#00A389] text-[10px] font-bold rounded uppercase tracking-wider">Analyzed</span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button class="view-report-btn p-2 text-slate-400 hover:text-[#0052CC] transition-colors" title="View Report"><i class="fa-solid fa-chart-line"></i></button>
+                    <button class="delete-seq-btn p-2 text-slate-400 hover:text-red-500 transition-colors" title="Delete Sequence"><i class="fa-solid fa-trash-can"></i></button>
+                  </td>
+                </tr>
+
+                <!-- Sample Row 2 -->
+                <tr class="sequence-row hover:bg-slate-50/50 transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded bg-slate-50 text-slate-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-file-dna"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-bold text-slate-800">sample_ref_9920.vcf</p>
+                        <p class="text-[10px] text-slate-500">SHA-256: 4f2e...b881</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Targeted Panel</span></td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Apr 25, 2026</span></td>
+                  <td class="px-6 py-4">
+                    <span class="px-2 py-1 bg-slate-100 text-slate-500 text-[10px] font-bold rounded uppercase tracking-wider">Pending</span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button class="run-analysis-btn p-2 text-slate-400 hover:text-[#0052CC] transition-colors" title="Run Analysis"><i class="fa-solid fa-play"></i></button>
+                    <button class="delete-seq-btn p-2 text-slate-400 hover:text-red-500 transition-colors" title="Delete Sequence"><i class="fa-solid fa-trash-can"></i></button>
+                  </td>
+                </tr>
+
+                <!-- Sample Row 3 -->
+                <tr class="sequence-row hover:bg-slate-50/50 transition-colors group">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded bg-blue-50 text-[#0052CC] flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-file-dna"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-bold text-slate-800">genomic_run_alpha.vcf</p>
+                        <p class="text-[10px] text-slate-500">SHA-256: 1c9d...e332</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Whole Genome</span></td>
+                  <td class="px-6 py-4"><span class="text-xs text-slate-600">Apr 26, 2026</span></td>
+                  <td class="px-6 py-4">
+                    <span class="px-2 py-1 bg-emerald-50 text-[#00A389] text-[10px] font-bold rounded uppercase tracking-wider">Analyzed</span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <button class="view-report-btn p-2 text-slate-400 hover:text-[#0052CC] transition-colors" title="View Report"><i class="fa-solid fa-chart-line"></i></button>
+                    <button class="delete-seq-btn p-2 text-slate-400 hover:text-red-500 transition-colors" title="Delete Sequence"><i class="fa-solid fa-trash-can"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Empty State (Hidden) -->
+          <div class="hidden flex-grow flex flex-col items-center justify-center min-h-[300px]">
+             <i class="fa-solid fa-dna text-4xl text-slate-200 mb-4"></i>
+             <p class="text-sm text-slate-400 font-bold uppercase tracking-widest">No Sequences Found</p>
+             <button class="mt-4 text-[#0052CC] text-xs font-bold hover:underline">UPLOAD YOUR FIRST FILE</button>
+          </div>
+        </div>
+
+        <!-- SECTION: System Workflow -->
+        <div id="section-system-workflow" class="app-section hidden h-full flex flex-col p-8 overflow-y-auto custom-scrollbar">
+          <div class="mb-8">
+            <h3 class="text-2xl font-display font-bold text-slate-800">System Workflow & Pipeline</h3>
+            <p class="text-sm text-slate-500 mt-1">Transparency into how HelixRX processes your genomic data securely.</p>
+          </div>
+
+          <!-- Pipeline KPI Cards -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Step 1 -->
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-5 relative overflow-hidden group">
+              <div class="absolute top-0 left-0 w-1 h-full bg-[#0052CC]"></div>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Step 01</span>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">VCF Ingestion</h4>
+              <p class="text-[11px] text-slate-500 leading-tight">Raw sequence parsing and variant normalization.</p>
+              <div class="mt-4 flex items-center gap-2">
+                <i class="fa-solid fa-file-import text-[#0052CC]"></i>
+                <span class="text-[10px] font-bold text-[#00A389] uppercase">Verified</span>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-5 relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-1 h-full bg-[#0052CC]"></div>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Step 02</span>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">Privacy Shield</h4>
+              <p class="text-[11px] text-slate-500 leading-tight">One-way SHA-256 ID pseudonymization.</p>
+              <div class="mt-4 flex items-center gap-2">
+                <i class="fa-solid fa-user-shield text-[#0052CC]"></i>
+                <span class="text-[10px] font-bold text-[#00A389] uppercase">Encrypted</span>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-5 relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-1 h-full bg-[#0052CC]"></div>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Step 03</span>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">AI Intelligence</h4>
+              <p class="text-[11px] text-slate-500 leading-tight">LLM cross-referencing with CPIC databases.</p>
+              <div class="mt-4 flex items-center gap-2">
+                <i class="fa-solid fa-microchip text-[#0052CC]"></i>
+                <span class="text-[10px] font-bold text-blue-400 uppercase">Processing</span>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-5 relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-1 h-full bg-[#00A389]"></div>
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Step 04</span>
+              <h4 class="text-sm font-bold text-slate-800 mb-1">Clinical Insight</h4>
+              <p class="text-[11px] text-slate-500 leading-tight">Generation of actionable medical report.</p>
+              <div class="mt-4 flex items-center gap-2">
+                <i class="fa-solid fa-file-medical text-[#00A389]"></i>
+                <span class="text-[10px] font-bold text-slate-300 uppercase">Awaiting</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accuracy & Validation Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Model Confidence</span>
+                <i class="fa-solid fa-bullseye text-[#00A389]"></i>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-display font-bold text-slate-800">99.4%</span>
+                <span class="text-xs text-[#00A389] font-bold">+0.2%</span>
+              </div>
+              <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4">
+                <div class="bg-[#00A389] h-full rounded-full" style="width: 99.4%"></div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Validation Match</span>
+                <i class="fa-solid fa-vial-circle-check text-[#0052CC]"></i>
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-display font-bold text-slate-800">98.1%</span>
+                <span class="text-xs text-slate-400">vs CPIC v3.2</span>
+              </div>
+              <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4">
+                <div class="bg-[#0052CC] h-full rounded-full" style="width: 98.1%"></div>
+              </div>
+            </div>
+
+            <div class="bg-white border border-[#DFE1E6] rounded-lg p-6">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Privacy Audit</span>
+                <i class="fa-solid fa-shield-halved text-slate-400"></i>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                One-way SHA-256 encryption active. No PII (Personally Identifiable Information) transmitted to LLM analysis layer.
+              </p>
+              <div class="mt-4 flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-[#00A389]"></div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase">Secure Hash Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+          <!-- SECTION: Settings -->
+          <div id="section-settings" class="app-section hidden h-full flex flex-col p-8">
+            <h3 class="text-2xl font-display font-bold text-slate-800 mb-6">Settings</h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <!-- Audience Overview -->
-              <div>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Metric Overview</p>
-                <div class="flex justify-between text-xs font-semibold text-slate-400 border-b border-[#DFE1E6] pb-2 mb-3"><span>Metrics</span><span>Values</span></div>
-                <div class="flex justify-between items-center mb-3">
-                  <span class="text-sm text-slate-700">Total Loci</span>
-                  <div class="flex items-center gap-2"><span class="font-bold text-slate-800">179.5k</span><span class="text-[10px] bg-red-50 text-red-500 px-1 rounded"><i class="fa-solid fa-arrow-down mr-0.5"></i>5%</span></div>
-                </div>
-                <div class="flex justify-between items-center mb-3">
-                  <span class="text-sm text-slate-700">Ti/Tv Ratio</span>
-                  <div class="flex items-center gap-2"><span class="font-bold text-slate-800">2.08</span><span class="text-[10px] bg-[#E6F6F4] text-[#00A389] px-1 rounded"><i class="fa-solid fa-arrow-down mr-0.5"></i>8%</span></div>
-                </div>
-              </div>
-
-              <!-- Metabolic Efficacy -->
-              <div class="border-l border-r border-[#DFE1E6] px-6">
-                <div class="flex justify-between items-start mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Account Information -->
+              <div class="bg-white border border-[#DFE1E6] rounded-lg p-6">
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-[#0052CC] text-2xl font-bold">G</div>
                   <div>
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Metabolic Efficacy</p>
-                    <p class="text-[10px] text-slate-400">Last 30 days comparison</p>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Conversions</p>
-                    <p class="font-bold text-slate-800 text-xl">22,000%</p>
+                    <h4 class="text-lg font-bold text-slate-800">Guest Analyst</h4>
+                    <p class="text-sm text-slate-500">guest.analyst@helixhealth.ai</p>
                   </div>
                 </div>
-                <!-- CSS Bar Chart Approximation -->
-                <div class="h-20 flex items-end gap-1.5 mt-auto">
-                  <div class="w-full bar-graph-col h-[30%] opacity-50"></div>
-                  <div class="w-full bar-graph-col h-[50%]"></div>
-                  <div class="w-full bar-graph-col h-[70%] active"></div>
-                  <div class="w-full bar-graph-col h-[90%] active"></div>
-                  <div class="w-full bar-graph-col h-[60%]"></div>
-                  <div class="w-full bar-graph-col h-[40%] opacity-50"></div>
-                  <div class="w-full bar-graph-col h-[30%] opacity-50"></div>
-                  <div class="w-full bar-graph-col h-[50%]"></div>
-                  <div class="w-full bar-graph-col h-[80%] active"></div>
+                
+                <div class="space-y-4">
+                  <div class="flex justify-between py-2 border-b border-[#DFE1E6]">
+                    <span class="text-sm text-slate-500">Role</span>
+                    <span class="text-sm font-bold text-slate-800">Clinical Researcher</span>
+                  </div>
+                  <div class="flex justify-between py-2 border-b border-[#DFE1E6]">
+                    <span class="text-sm text-slate-500">Organization</span>
+                    <span class="text-sm font-bold text-slate-800">Helix Research Institute</span>
+                  </div>
+                  <div class="flex justify-between py-2">
+                    <span class="text-sm text-slate-500">Account ID</span>
+                    <span class="text-sm font-mono text-slate-400">HX-8821-X92</span>
+                  </div>
                 </div>
+                
+                <button class="w-full mt-6 py-2 border border-[#DFE1E6] rounded text-sm font-bold text-slate-700 hover:bg-slate-50 transition-colors">EDIT PROFILE</button>
               </div>
+              
+              <!-- Preferences -->
+              <div class="bg-white border border-[#DFE1E6] rounded-lg p-6">
+                <h4 class="text-sm font-bold text-slate-800 uppercase tracking-widest mb-6">Preferences</h4>
+                
+                <div class="space-y-6">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="text-sm font-bold text-slate-800">Dark Mode</p>
+                      <p class="text-xs text-slate-500">Adjust the interface for low-light environments</p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="dark-mode-toggle">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="text-sm font-bold text-slate-800">High Contrast</p>
+                      <p class="text-xs text-slate-500">Increase visibility for key data points</p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
 
-              <!-- Views by Gene Path -->
-              <div>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Views by Gene Path</p>
-                <div class="flex justify-between text-xs font-semibold text-slate-400 border-b border-[#DFE1E6] pb-2 mb-3"><span>Page Path</span><span>Interactions</span></div>
-                <div class="flex justify-between items-center mb-3 text-sm">
-                  <span class="text-slate-600">/</span>
-                  <span class="font-bold text-slate-800">31,821</span>
-                </div>
-                <div class="flex justify-between items-center mb-3 text-sm">
-                  <span class="text-slate-600">/CYP2D6</span>
-                  <span class="font-bold text-slate-800">8,060</span>
-                </div>
-                <div class="flex justify-between items-center mb-3 text-sm">
-                  <span class="text-slate-600">/CYP2C19</span>
-                  <span class="font-bold text-slate-800">7,724</span>
+                  <div class="pt-4 border-t border-[#DFE1E6]">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Notification Settings</p>
+                    <div class="flex items-center gap-3 mb-3">
+                      <input type="checkbox" checked class="rounded text-[#0052CC]">
+                      <span class="text-sm text-slate-600">Email alerts for critical variants</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -426,15 +862,44 @@
           
           // Visual active state swap
           sidebarNavItems.forEach(nav => {
-            nav.classList.remove('active', 'bg-white', 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]');
+            nav.classList.remove('active', 'bg-white', 'shadow-[0_4px_15px_rgba(0,0,0,0.03)]');
           });
-          e.currentTarget.classList.add('active', 'bg-white', 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]');
+          e.currentTarget.classList.add('active', 'bg-white', 'shadow-[0_4px_15px_rgba(0,0,0,0.03)]');
           
           const sectionName = e.currentTarget.innerText.trim();
-          console.log(`[Navigation] User clicked on section: ${sectionName}`);
+          const targetId = 'section-' + sectionName.toLowerCase().replace(/\s+/g, '-');
           
-          // In a real app, this would route to different components. 
-          // For now, we capture the action and log it.
+          // Hide all sections, show target
+          document.querySelectorAll('.app-section').forEach(sec => sec.classList.add('hidden'));
+          const targetSection = document.getElementById(targetId);
+          if(targetSection) {
+            targetSection.classList.remove('hidden', 'fade-in');
+            void targetSection.offsetWidth; // Trigger reflow
+            targetSection.classList.add('fade-in');
+          }
+        });
+      });
+
+      // Result View Toggles
+      const resultToggles = document.querySelectorAll('.tab-toggle');
+      resultToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          resultToggles.forEach(t => {
+            t.classList.remove('active', 'bg-white', 'text-slate-800', 'border', 'border-[#DFE1E6]');
+            t.classList.add('text-slate-500');
+          });
+          toggle.classList.add('active', 'bg-white', 'text-slate-800', 'border', 'border-[#DFE1E6]');
+          toggle.classList.remove('text-slate-500');
+
+          const viewId = toggle.getAttribute('data-view');
+          document.querySelectorAll('.result-view').forEach(view => view.classList.add('hidden'));
+          
+          const targetView = document.getElementById(viewId);
+          if(targetView) {
+            targetView.classList.remove('hidden', 'fade-in');
+            void targetView.offsetWidth; // Trigger reflow
+            targetView.classList.add('fade-in');
+          }
         });
       });
 
@@ -444,10 +909,131 @@
       
       if(sidebarRunBtn && mainRunBtn) {
         sidebarRunBtn.addEventListener('click', () => {
-          console.log("[Action] Sidebar 'Run Analysis' clicked. Forwarding to main executable.");
           mainRunBtn.click();
         });
+        
+        mainRunBtn.addEventListener('click', () => {
+          const progressContainer = document.getElementById('analysis-progress-container');
+          const progressBar = document.getElementById('analysis-progress-bar');
+          const progressText = document.getElementById('analysis-progress-text');
+          
+          if(progressContainer) {
+            progressContainer.classList.remove('hidden', 'fade-in');
+            void progressContainer.offsetWidth;
+            progressContainer.classList.add('fade-in');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+              progress += Math.floor(Math.random() * 10) + 5;
+              if (progress > 100) progress = 100;
+              
+              if (progressBar) progressBar.style.width = progress + '%';
+              if (progressText) progressText.innerText = progress + '%';
+              
+              if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                  progressContainer.classList.add('hidden');
+                  // Reset for next time
+                  if (progressBar) progressBar.style.width = '0%';
+                  if (progressText) progressText.innerText = '0%';
+                }, 1000);
+              }
+            }, 200);
+          }
+        });
       }
+
+      // Dark Mode Logic
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      const body = document.body;
+
+      // Check for saved preference
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark');
+        if (darkModeToggle) darkModeToggle.checked = true;
+      }
+
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', () => {
+          if (darkModeToggle.checked) {
+            body.classList.add('dark');
+            localStorage.setItem('darkMode', 'enabled');
+          } else {
+            body.classList.remove('dark');
+            localStorage.setItem('darkMode', 'disabled');
+          }
+        });
+      }
+
+      // Sequence Library Search Simulation
+      const sequenceSearch = document.getElementById('sequence-search');
+      const sequenceRows = document.querySelectorAll('.sequence-row');
+      
+      if (sequenceSearch) {
+        sequenceSearch.addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          sequenceRows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(term) ? '' : 'none';
+          });
+        });
+      }
+
+      // Sequence Library Interactions
+      const uploadNewBtn = document.getElementById('upload-new-btn');
+      if (uploadNewBtn) {
+        uploadNewBtn.addEventListener('click', () => {
+          // Switch to Overview and click the dropzone
+          const overviewTab = Array.from(document.querySelectorAll('.nav-item')).find(el => el.innerText.trim() === 'Overview');
+          if (overviewTab) {
+            overviewTab.click();
+            setTimeout(() => {
+              const dropzone = document.getElementById('dropzone');
+              if (dropzone) dropzone.click();
+            }, 300);
+          }
+        });
+      }
+
+      document.querySelectorAll('.run-analysis-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const row = e.target.closest('tr');
+          const fileName = row.querySelector('.text-sm.font-bold').innerText;
+          
+          const overviewTab = Array.from(document.querySelectorAll('.nav-item')).find(el => el.innerText.trim() === 'Overview');
+          if (overviewTab) {
+            overviewTab.click();
+            alert(`Ready to analyze: ${fileName}. Please select your target medications and click Execute Scan.`);
+          }
+        });
+      });
+
+      document.querySelectorAll('.view-report-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const overviewTab = Array.from(document.querySelectorAll('.nav-item')).find(el => el.innerText.trim() === 'Overview');
+          if (overviewTab) {
+            overviewTab.click();
+            // Scroll to results if they exist
+            const results = document.getElementById('results-container');
+            if (results && !results.classList.contains('hidden')) {
+              results.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('.delete-seq-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const row = e.target.closest('tr');
+          const fileName = row.querySelector('.text-sm.font-bold').innerText;
+          if (confirm(`Are you sure you want to delete ${fileName}?`)) {
+            row.style.opacity = '0.5';
+            row.style.pointerEvents = 'none';
+            setTimeout(() => row.remove(), 500);
+          }
+        });
+      });
     </script>
   </body>
 </html>

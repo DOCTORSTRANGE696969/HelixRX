@@ -611,6 +611,43 @@ function displayAnalysis(analysis) {
 
     // Update clinical view summary
     updateClinicalView(analysis);
+
+    // Update Genomic Core View
+    updateGenomicCoreView(analysis);
+}
+
+function updateGenomicCoreView(analysis) {
+    const profile = analysis.pharmacogenomic_profile || {};
+    const geneEl = document.getElementById('core-gene-name');
+    const genotypeEl = document.getElementById('core-genotype-call');
+    const tableBody = document.querySelector('#core-view tbody');
+
+    if (geneEl) geneEl.textContent = profile.primary_gene || 'N/A';
+    if (genotypeEl) genotypeEl.textContent = profile.diplotype || 'N/A';
+
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        const variants = profile.detected_variants || [];
+        
+        if (variants.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="px-4 py-8 text-center text-slate-400 italic">No clinically significant variants detected for this drug target.</td>
+                </tr>
+            `;
+        } else {
+            variants.forEach(variant => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-4 py-3 font-mono text-slate-700">${variant.rsid || 'N/A'}</td>
+                    <td class="px-4 py-3">${variant.location || 'N/A'}</td>
+                    <td class="px-4 py-3"><span class="font-bold">${variant.ref || ''}</span> > <span class="text-[#0052CC] font-bold">${variant.alt || ''}</span></td>
+                    <td class="px-4 py-3 text-right text-emerald-600 font-bold">${variant.qual || '99.9'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    }
 }
 
 function updateClinicalView(analysis) {
