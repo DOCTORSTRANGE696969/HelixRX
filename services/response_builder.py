@@ -177,7 +177,7 @@ def prepare_llm_prompt(
     phenotype: str,
     diplotype: str,
     cpic_level: str = None,
-    variants: list = None,
+    variant_count: int = 0,
     guideline_url: str = None,
     risk_assessment: dict = None
 ) -> str:
@@ -196,8 +196,8 @@ def prepare_llm_prompt(
         Diplotype
     cpic_level : str
         CPIC evidence level
-    variants : list
-        Detected variants
+    variant_count : int
+        Number of detected variants
         
     Returns:
     --------
@@ -231,7 +231,7 @@ PATIENT'S GENETIC PROFILE:
 - Your metabolism type: {phenotype_desc}
 - Your genetic combination: {diplotype}
 - Science confidence: {cpic_level or 'Standard'} level evidence
-- Genetic markers found: {len(variants or [])} identified
+- Genetic markers found: {variant_count} identified
 - Risk assessment: {risk_label or 'Unknown'} (severity: {risk_severity or 'unknown'})
 - CPIC guideline link (use if available): {guideline_url or 'Not available'}
 

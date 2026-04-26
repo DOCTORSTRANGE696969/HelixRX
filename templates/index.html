@@ -7,9 +7,15 @@
     <!-- Tailwind CSS v3 with Plugins -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Font Awesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <!-- Google Fonts: Outfit and Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script>
       tailwind.config = {
         theme: {
@@ -28,43 +34,56 @@
                 successBg: "#ecfdf5",
                 text: "#1e293b",
                 muted: "#64748b",
-                border: "#e2e8f0"
+                border: "#e2e8f0",
               },
             },
             boxShadow: {
-              'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
-              'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)',
-            }
+              soft: "0 10px 40px -10px rgba(0,0,0,0.08)",
+              "inner-soft": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
+            },
           },
         },
       };
     </script>
     <style>
       /* Custom Scrollbar */
-      .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-      .hidden { display: none !important; }
-      
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .hidden {
+        display: none !important;
+      }
+
       body {
         background-color: #f0f4f8; /* Soft blue-grey like the reference background */
       }
-      
+
       .console-container {
         background-color: #f8fafc;
         border-radius: 2rem; /* highly rounded */
-        box-shadow: 0 20px 60px -15px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
-        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow:
+          0 20px 60px -15px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.8);
       }
-      
+
       .card-inner {
         background: #ffffff;
         border-radius: 1.5rem;
-        box-shadow: 0 4px 20px -5px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
         border: 1px solid #f1f5f9;
       }
-      
+
       .dashed-box {
         border: 2px dashed #10b981; /* Green dashed border for VCF area */
         background: #f8fafc;
@@ -75,7 +94,7 @@
         transform-origin: 60px 60px;
         transition: stroke-dashoffset 0.5s ease;
       }
-      
+
       /* Tabs styling */
       .tab-button.active {
         background-color: #f1f5f9;
@@ -85,31 +104,48 @@
       }
     </style>
   </head>
-  <body class="text-brand-text font-sans min-h-screen flex items-center justify-center p-4 sm:p-8">
-
+  <body
+    class="text-brand-text font-sans min-h-screen flex items-center justify-center p-4 sm:p-8"
+  >
     <!-- Main App Wrapper simulating the Intelligence Console window -->
-    <div class="console-container w-full max-w-[1300px] flex flex-col overflow-hidden relative">
-      
+    <div
+      class="console-container w-full max-w-[1300px] flex flex-col overflow-hidden relative"
+    >
       <!-- Top Bar / Header -->
-      <header class="px-8 py-5 flex items-center justify-between border-b border-white/50 bg-white/40 backdrop-blur-md">
+      <header
+        class="px-8 py-5 flex items-center justify-between border-b border-white/50 bg-white/40 backdrop-blur-md"
+      >
         <div class="flex items-center gap-3">
-          <h1 class="text-xl font-display font-bold text-slate-800 tracking-tight">Intelligence Console</h1>
+          <h1
+            class="text-xl font-display font-bold text-slate-800 tracking-tight"
+          >
+            Intelligence Console
+          </h1>
         </div>
-        
+
         <div class="flex items-center gap-4">
           <!-- System Secure Badge -->
-          <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100">
-            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
-            <span class="text-xs font-bold text-slate-600 tracking-wider uppercase">System Secure</span>
+          <div
+            class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100"
+          >
+            <div
+              class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"
+            ></div>
+            <span
+              class="text-xs font-bold text-slate-600 tracking-wider uppercase"
+              >System Secure</span
+            >
           </div>
           <!-- Notifications / Profile -->
-          <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-100 cursor-pointer hover:bg-slate-50 transition-colors">
+          <div
+            class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-100 cursor-pointer hover:bg-slate-50 transition-colors"
+          >
             <i class="fa-solid fa-bell text-slate-400"></i>
           </div>
           <div class="hidden">
-             <!-- Hidden data spans needed by JS -->
-             <span id="session-id">2843-BETA</span>
-             <span id="progress-percent">0%</span>
+            <!-- Hidden data spans needed by JS -->
+            <span id="session-id">2843-BETA</span>
+            <span id="progress-percent">0%</span>
           </div>
         </div>
       </header>
@@ -117,59 +153,147 @@
       <!-- Dashboard Content -->
       <main class="p-6 md:p-8 flex-grow">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
           <!-- Left Column (Genomic Context) -->
           <div class="lg:col-span-5 flex flex-col h-full">
             <div class="card-inner flex flex-col h-full p-8 relative">
-              <h2 class="text-xs font-bold text-brand-primary uppercase tracking-widest mb-6">Genomic Context</h2>
-              
+              <h2
+                class="text-xs font-bold text-brand-primary uppercase tracking-widest mb-6"
+              >
+                Genomic Context
+              </h2>
+
               <!-- VCF Dropzone -->
               <div class="flex-grow flex flex-col">
-                <div id="dropzone" class="dashed-box flex-grow flex flex-col items-center justify-center p-10 cursor-pointer hover:bg-slate-50 transition-colors relative group min-h-[220px]">
-                  <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-file-arrow-up text-brand-primary text-xl"></i>
+                <div
+                  id="dropzone"
+                  class="dashed-box flex-grow flex flex-col items-center justify-center p-10 cursor-pointer hover:bg-slate-50 transition-colors relative group min-h-[220px]"
+                >
+                  <div
+                    class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                  >
+                    <i
+                      class="fa-solid fa-file-arrow-up text-brand-primary text-xl"
+                    ></i>
                   </div>
-                  <h4 class="text-slate-800 font-semibold text-base mb-1">Upload Sequence (VCF)</h4>
-                  <p class="text-sm text-slate-400">Drag & drop or click to browse</p>
-                  <input type="file" id="vcf-file-input" accept=".vcf" class="hidden" />
+                  <h4 class="text-slate-800 font-semibold text-base mb-1">
+                    Upload Sequence (VCF)
+                  </h4>
+                  <p class="text-sm text-slate-400">
+                    Drag & drop or click to browse
+                  </p>
+                  <input
+                    type="file"
+                    id="vcf-file-input"
+                    accept=".vcf"
+                    class="hidden"
+                  />
                 </div>
-                
-                <p id="vcf-error" class="text-xs text-red-500 mt-3 font-medium hidden pl-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid file type.</p>
-                <p id="vcf-success" class="text-sm text-emerald-600 mt-3 font-medium hidden flex items-center gap-2 pl-2">
-                  <i class="fa-solid fa-circle-check"></i> <span id="vcf-filename-display">Sequence Loaded</span>
+
+                <p
+                  id="vcf-error"
+                  class="text-xs text-red-500 mt-3 font-medium hidden pl-2"
+                >
+                  <i class="fa-solid fa-triangle-exclamation mr-1"></i> Invalid
+                  file type.
+                </p>
+                <p
+                  id="vcf-success"
+                  class="text-sm text-emerald-600 mt-3 font-medium hidden flex items-center gap-2 pl-2"
+                >
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span id="vcf-filename-display">Sequence Loaded</span>
                 </p>
               </div>
 
               <!-- Medications Selector -->
               <div class="mt-8 mb-8">
-                <label class="block text-sm font-semibold text-slate-800 mb-3">Medications</label>
+                <label class="block text-sm font-semibold text-slate-800 mb-3"
+                  >Medications</label
+                >
                 <div class="relative">
-                  <div id="drug-selector-box" class="w-full border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 flex items-center justify-between hover:border-slate-300 transition-colors shadow-inner-soft focus-within:ring-2 focus-within:ring-brand-primary/20 focus-within:border-brand-primary">
-                    <div id="selected-drugs" class="flex gap-2 flex-wrap flex-1 items-center">
-                      <input id="drug-input" type="text" class="flex-1 min-w-[140px] bg-transparent border-0 focus:ring-0 p-0 text-sm text-slate-800 placeholder:text-slate-400 outline-none" placeholder="Search drug..." autocomplete="off" />
+                  <div
+                    id="drug-selector-box"
+                    class="w-full border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 flex items-center justify-between hover:border-slate-300 transition-colors shadow-inner-soft focus-within:ring-2 focus-within:ring-brand-primary/20 focus-within:border-brand-primary"
+                  >
+                    <div
+                      id="selected-drugs"
+                      class="flex gap-2 flex-wrap flex-1 items-center"
+                    >
+                      <input
+                        id="drug-input"
+                        type="text"
+                        class="flex-1 min-w-[140px] bg-transparent border-0 focus:ring-0 p-0 text-sm text-slate-800 placeholder:text-slate-400 outline-none"
+                        placeholder="Search drug..."
+                        autocomplete="off"
+                      />
                     </div>
                     <div class="flex items-center gap-3 text-slate-400">
-                      <i id="clear-all" class="fa-solid fa-xmark cursor-pointer hover:text-slate-600 hidden"></i>
+                      <i
+                        id="clear-all"
+                        class="fa-solid fa-xmark cursor-pointer hover:text-slate-600 hidden"
+                      ></i>
                     </div>
                   </div>
-                  <p id="drug-error" class="text-xs text-red-500 mt-2 font-medium hidden pl-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> At least one drug is required.</p>
+                  <p
+                    id="drug-error"
+                    class="text-xs text-red-500 mt-2 font-medium hidden pl-2"
+                  >
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i> At
+                    least one drug is required.
+                  </p>
 
                   <!-- Dropdown Menu -->
-                  <div id="drug-dropdown" class="hidden absolute z-20 mt-2 w-full bg-white shadow-xl border border-slate-100 rounded-xl py-2 text-sm ring-1 ring-black ring-opacity-5 focus:outline-none custom-scrollbar overflow-auto max-h-60">
+                  <div
+                    id="drug-dropdown"
+                    class="hidden absolute z-20 mt-2 w-full bg-white shadow-xl border border-slate-100 rounded-xl py-2 text-sm ring-1 ring-black ring-opacity-5 focus:outline-none custom-scrollbar overflow-auto max-h-60"
+                  >
                     <ul class="divide-y divide-slate-50">
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="CODEINE">CODEINE</li>
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="WARFARIN">WARFARIN</li>
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="CLOPIDOGREL">CLOPIDOGREL</li>
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="SIMVASTATIN">SIMVASTATIN</li>
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="AZATHIOPRINE">AZATHIOPRINE</li>
-                      <li class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium" data-drug="FLUOROURACIL">FLUOROURACIL</li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="CODEINE"
+                      >
+                        CODEINE
+                      </li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="WARFARIN"
+                      >
+                        WARFARIN
+                      </li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="CLOPIDOGREL"
+                      >
+                        CLOPIDOGREL
+                      </li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="SIMVASTATIN"
+                      >
+                        SIMVASTATIN
+                      </li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="AZATHIOPRINE"
+                      >
+                        AZATHIOPRINE
+                      </li>
+                      <li
+                        class="drug-option text-slate-700 select-none relative py-2.5 px-4 hover:bg-slate-50 cursor-pointer font-medium"
+                        data-drug="FLUOROURACIL"
+                      >
+                        FLUOROURACIL
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               <!-- Action Button -->
-              <button id="run-analysis-btn" class="w-full bg-brand-primary hover:bg-brand-primaryHover text-white font-bold text-sm tracking-widest py-4 px-6 rounded-full shadow-lg shadow-brand-primary/30 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 uppercase">
+              <button
+                id="run-analysis-btn"
+                class="w-full bg-brand-primary hover:bg-brand-primaryHover text-white font-bold text-sm tracking-widest py-4 px-6 rounded-full shadow-lg shadow-brand-primary/30 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 uppercase"
+              >
                 Execute Scan
               </button>
             </div>
@@ -178,30 +302,59 @@
           <!-- Right Column (Results) -->
           <div class="lg:col-span-7 flex flex-col h-full">
             <!-- We add the hidden class dynamically based on user interaction, initialized hidden -->
-            <div id="results-container" class="card-inner flex flex-col h-full p-8 hidden relative">
-              
+            <div
+              id="results-container"
+              class="card-inner flex flex-col h-full p-8 hidden relative"
+            >
               <!-- Top Header & Tabs area (Mimicking the reference) -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-6"
+              >
                 <div>
-                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Target Medication</p>
+                  <p
+                    class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1"
+                  >
+                    Target Medication
+                  </p>
                   <div class="flex items-center gap-2">
-                    <select id="analysis-drug-select" class="text-2xl font-display font-bold text-brand-primary bg-transparent border-none p-0 focus:ring-0 cursor-pointer pr-6 appearance-none uppercase tracking-wide">
+                    <select
+                      id="analysis-drug-select"
+                      class="text-2xl font-display font-bold text-brand-primary bg-transparent border-none p-0 focus:ring-0 cursor-pointer pr-6 appearance-none uppercase tracking-wide"
+                    >
                       <option value="">--</option>
                     </select>
-                    <i class="fa-solid fa-chevron-down text-brand-primary text-sm pointer-events-none -ml-5"></i>
+                    <i
+                      class="fa-solid fa-chevron-down text-brand-primary text-sm pointer-events-none -ml-5"
+                    ></i>
                   </div>
                 </div>
-                
+
                 <!-- Right Side Actions -->
                 <div class="flex items-center gap-3 self-start">
                   <!-- View Toggles (acting as the top nav tabs) -->
-                  <div class="flex p-1 rounded-xl shadow-sm border border-slate-100 bg-slate-50/50">
-                    <button id="toggle-genomic" class="px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-800 bg-white shadow-sm transition-all border border-slate-100">Genomic</button>
-                    <button id="toggle-clinical" class="px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-700 transition-all">Clinical</button>
+                  <div
+                    class="flex p-1 rounded-xl shadow-sm border border-slate-100 bg-slate-50/50"
+                  >
+                    <button
+                      id="toggle-genomic"
+                      class="px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-800 bg-white shadow-sm transition-all border border-slate-100"
+                    >
+                      Genomic
+                    </button>
+                    <button
+                      id="toggle-clinical"
+                      class="px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-700 transition-all"
+                    >
+                      Clinical
+                    </button>
                   </div>
-                  
+
                   <!-- Download Button -->
-                  <button id="download-report-btn" class="hidden bg-white hover:bg-slate-50 text-slate-600 w-10 h-10 rounded-xl border border-slate-200 shadow-sm transition-colors flex items-center justify-center" title="Download Report">
+                  <button
+                    id="download-report-btn"
+                    class="hidden bg-white hover:bg-slate-50 text-slate-600 w-10 h-10 rounded-xl border border-slate-200 shadow-sm transition-colors flex items-center justify-center"
+                    title="Download Report"
+                  >
                     <i class="fa-solid fa-download text-sm"></i>
                   </button>
                 </div>
@@ -209,120 +362,293 @@
 
               <!-- Genomic View (Mapped to the Metrics/Stats area) -->
               <div id="genomic-view" class="flex-grow flex flex-col">
-                <h3 class="text-base font-bold text-slate-800 mb-6">VCF Integrity Metrics</h3>
-                
+                <h3 class="text-base font-bold text-slate-800 mb-6">
+                  VCF Integrity Metrics
+                </h3>
+
                 <!-- Stats Row (Restyled to look like the 4 blocks) -->
                 <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-                  <div class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Composite Risk</span>
-                    <span id="risk-status" class="text-lg font-display font-bold text-brand-success leading-tight">SAFE</span>
+                  <div
+                    class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"
+                      >Composite Risk</span
+                    >
+                    <span
+                      id="risk-status"
+                      class="text-lg font-display font-bold text-brand-success leading-tight"
+                      >SAFE</span
+                    >
                   </div>
-                  <div class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Severity Score</span>
+                  <div
+                    class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"
+                      >Severity Score</span
+                    >
                     <div id="severity-badge" class="flex items-center gap-1">
-                      <span id="severity-score" class="text-lg font-display font-bold text-emerald-600">0.0</span>
-                      <span id="severity-level" class="text-[10px] font-bold text-emerald-600 uppercase hidden">(NONE)</span>
+                      <span
+                        id="severity-score"
+                        class="text-lg font-display font-bold text-emerald-600"
+                        >0.0</span
+                      >
+                      <span
+                        id="severity-level"
+                        class="text-[10px] font-bold text-emerald-600 uppercase hidden"
+                        >(NONE)</span
+                      >
                     </div>
                   </div>
-                  <div class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-2">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Detected Variant</span>
-                    <span id="detected-variant" class="text-sm font-display font-bold text-slate-700 leading-tight w-full break-words">-</span>
+                  <div
+                    class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-2"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"
+                      >Detected Variant</span
+                    >
+                    <span
+                      id="detected-variant"
+                      class="text-sm font-display font-bold text-slate-700 leading-tight w-full break-words"
+                      >-</span
+                    >
                   </div>
-                  <div class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Phenotype</span>
-                    <span id="predicted-phenotype" class="text-sm font-display font-bold text-brand-primary">-</span>
+                  <div
+                    class="bg-slate-50 rounded-2xl p-4 flex flex-col justify-center items-center text-center border border-slate-100 lg:col-span-1"
+                  >
+                    <span
+                      class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2"
+                      >Phenotype</span
+                    >
+                    <span
+                      id="predicted-phenotype"
+                      class="text-sm font-display font-bold text-brand-primary"
+                      >-</span
+                    >
                   </div>
                 </div>
 
                 <!-- Quality Assured Banner -->
-                <div class="bg-blue-50/50 rounded-2xl p-5 flex items-start gap-4 border border-blue-100 mb-8">
+                <div
+                  class="bg-blue-50/50 rounded-2xl p-5 flex items-start gap-4 border border-blue-100 mb-8"
+                >
                   <div class="mt-0.5">
-                    <i class="fa-solid fa-shield-halved text-brand-primary text-xl"></i>
+                    <i
+                      class="fa-solid fa-shield-halved text-brand-primary text-xl"
+                    ></i>
                   </div>
                   <div>
-                    <h4 class="font-bold text-slate-800 text-sm mb-1">Sequencing Quality Assured</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">The Ti/Tv ratio is within standard human WGS range. Target pharmacogenes have sufficient depth for confident calling.</p>
+                    <h4 class="font-bold text-slate-800 text-sm mb-1">
+                      Sequencing Quality Assured
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                      The Ti/Tv ratio is within standard human WGS range. Target
+                      pharmacogenes have sufficient depth for confident calling.
+                    </p>
                   </div>
                 </div>
 
                 <!-- Inner Tabs for details -->
                 <div class="mt-auto">
                   <div class="flex gap-2 border-b border-slate-100 pb-2 mb-4">
-                    <button class="tab-button active px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors" data-tab="profile">Profile</button>
-                    <button class="tab-button px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors" data-tab="recommendation">Recommendation</button>
-                    <button class="tab-button px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors" data-tab="explanation">Explanation</button>
+                    <button
+                      class="tab-button active px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors"
+                      data-tab="profile"
+                    >
+                      Profile
+                    </button>
+                    <button
+                      class="tab-button px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors"
+                      data-tab="recommendation"
+                    >
+                      Recommendation
+                    </button>
+                    <button
+                      class="tab-button px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-slate-800 transition-colors"
+                      data-tab="explanation"
+                    >
+                      Explanation
+                    </button>
                   </div>
 
-                  <div id="tab-profile" class="tab-content text-sm text-slate-600 pt-2">
-                    <p class="mb-4"><strong class="text-slate-800 font-semibold">Metadata:</strong> <span id="metadata-text">Loading...</span></p>
+                  <div
+                    id="tab-profile"
+                    class="tab-content text-sm text-slate-600 pt-2"
+                  >
+                    <p class="mb-4">
+                      <strong class="text-slate-800 font-semibold"
+                        >Metadata:</strong
+                      >
+                      <span id="metadata-text">Loading...</span>
+                    </p>
                     <div class="flex flex-wrap gap-2 mb-4" id="trust-badges">
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-700 text-[10px] font-bold uppercase rounded-md border border-slate-200">
-                        <i class="fa-solid fa-certificate text-brand-primary"></i> <span id="cpic-level-badge">CPIC Level A</span>
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-700 text-[10px] font-bold uppercase rounded-md border border-slate-200"
+                      >
+                        <i
+                          class="fa-solid fa-certificate text-brand-primary"
+                        ></i>
+                        <span id="cpic-level-badge">CPIC Level A</span>
                       </span>
-                      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-700 text-[10px] font-bold uppercase rounded-md border border-slate-200">
-                        <i class="fa-solid fa-clock-rotate-left text-brand-primary"></i> <span id="guideline-updated">Updated: Jan 2026</span>
+                      <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-700 text-[10px] font-bold uppercase rounded-md border border-slate-200"
+                      >
+                        <i
+                          class="fa-solid fa-clock-rotate-left text-brand-primary"
+                        ></i>
+                        <span id="guideline-updated">Updated: Jan 2026</span>
                       </span>
                     </div>
-                    <p><a id="guideline-link" href="#" target="_blank" class="text-brand-primary font-semibold hover:underline text-xs flex items-center gap-1">View Source Database <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a></p>
+                    <p>
+                      <a
+                        id="guideline-link"
+                        href="#"
+                        target="_blank"
+                        class="text-brand-primary font-semibold hover:underline text-xs flex items-center gap-1"
+                        >View Source Database
+                        <i
+                          class="fa-solid fa-arrow-up-right-from-square text-[10px]"
+                        ></i
+                      ></a>
+                    </p>
                   </div>
-                  
-                  <div id="tab-recommendation" class="tab-content hidden text-sm text-slate-600 pt-2">
-                    <div id="recommendation-content" class="p-5 bg-slate-50 rounded-xl border border-slate-100 leading-relaxed">No data available</div>
+
+                  <div
+                    id="tab-recommendation"
+                    class="tab-content hidden text-sm text-slate-600 pt-2"
+                  >
+                    <div
+                      id="recommendation-content"
+                      class="p-5 bg-slate-50 rounded-xl border border-slate-100 leading-relaxed"
+                    >
+                      No data available
+                    </div>
                   </div>
-                  
-                  <div id="tab-explanation" class="tab-content hidden text-sm text-slate-600 pt-2">
-                    <div id="explanation-content" class="p-5 bg-slate-50 rounded-xl border border-slate-100 leading-relaxed">No data available</div>
+
+                  <div
+                    id="tab-explanation"
+                    class="tab-content hidden text-sm text-slate-600 pt-2"
+                  >
+                    <div
+                      id="explanation-content"
+                      class="p-5 bg-slate-50 rounded-xl border border-slate-100 leading-relaxed"
+                    >
+                      No data available
+                    </div>
                   </div>
                 </div>
-                
+
                 <!-- Hidden elements to preserve JS bindings -->
                 <div class="hidden">
-                  <svg width="120" height="80"><path id="gauge-arc" d="M 10 60 A 50 50 0 0 1 110 60" /></svg>
+                  <svg width="120" height="80">
+                    <path id="gauge-arc" d="M 10 60 A 50 50 0 0 1 110 60" />
+                  </svg>
                   <p id="risk-index-label"></p>
                 </div>
               </div>
 
               <!-- Clinical View -->
               <div id="clinical-view" class="hidden flex-grow flex flex-col">
-                <h3 class="text-base font-bold text-slate-800 mb-6">Clinical Actions & Adjustments</h3>
+                <h3 class="text-base font-bold text-slate-800 mb-6">
+                  Clinical Actions & Adjustments
+                </h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Clinical Risk</p>
-                    <p id="clinical-risk" class="text-2xl font-display font-bold text-slate-800">-</p>
-                    <p id="clinical-risk-detail" class="text-xs text-slate-500 mt-2">-</p>
+                  <div
+                    class="bg-slate-50 border border-slate-100 rounded-2xl p-6"
+                  >
+                    <p
+                      class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2"
+                    >
+                      Clinical Risk
+                    </p>
+                    <p
+                      id="clinical-risk"
+                      class="text-2xl font-display font-bold text-slate-800"
+                    >
+                      -
+                    </p>
+                    <p
+                      id="clinical-risk-detail"
+                      class="text-xs text-slate-500 mt-2"
+                    >
+                      -
+                    </p>
                   </div>
-                  <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Urgency</p>
-                    <p id="clinical-urgency" class="text-2xl font-display font-bold text-slate-800">-</p>
-                    <p class="text-xs text-slate-500 mt-2">Discuss with provider based on guidance.</p>
+                  <div
+                    class="bg-slate-50 border border-slate-100 rounded-2xl p-6"
+                  >
+                    <p
+                      class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2"
+                    >
+                      Urgency
+                    </p>
+                    <p
+                      id="clinical-urgency"
+                      class="text-2xl font-display font-bold text-slate-800"
+                    >
+                      -
+                    </p>
+                    <p class="text-xs text-slate-500 mt-2">
+                      Discuss with provider based on guidance.
+                    </p>
                   </div>
-                  <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6 md:col-span-2">
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-3">Dosage Adjustment</p>
-                    <p id="clinical-dosage" class="text-sm font-medium text-slate-700 leading-relaxed">-</p>
+                  <div
+                    class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6 md:col-span-2"
+                  >
+                    <p
+                      class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-3"
+                    >
+                      Dosage Adjustment
+                    </p>
+                    <p
+                      id="clinical-dosage"
+                      class="text-sm font-medium text-slate-700 leading-relaxed"
+                    >
+                      -
+                    </p>
                   </div>
-                  <div class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6 md:col-span-2">
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-3">Monitoring Requirements</p>
-                    <p id="clinical-monitoring" class="text-sm font-medium text-slate-700 leading-relaxed">-</p>
+                  <div
+                    class="bg-white border border-slate-100 shadow-sm rounded-2xl p-6 md:col-span-2"
+                  >
+                    <p
+                      class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-3"
+                    >
+                      Monitoring Requirements
+                    </p>
+                    <p
+                      id="clinical-monitoring"
+                      class="text-sm font-medium text-slate-700 leading-relaxed"
+                    >
+                      -
+                    </p>
                   </div>
                 </div>
               </div>
 
               <!-- Utility Buttons (Download) was moved to header -->
+            </div>
 
-            </div>
-            
             <!-- Default Empty State showing when Results Container is hidden -->
-            <div id="empty-state" class="card-inner flex flex-col h-full items-center justify-center p-8 opacity-50 border-dashed">
-                <i class="fa-solid fa-microscope text-4xl text-slate-300 mb-4"></i>
-                <h3 class="text-lg font-display font-bold text-slate-400">Awaiting Genomic Data</h3>
-                <p class="text-sm text-slate-400 text-center max-w-sm mt-2">Upload a sequence and select target medications to view integrity metrics and molecular mapping.</p>
+            <div
+              id="empty-state"
+              class="card-inner flex flex-col h-full items-center justify-center p-8 opacity-50 border-dashed"
+            >
+              <i
+                class="fa-solid fa-microscope text-4xl text-slate-300 mb-4"
+              ></i>
+              <h3 class="text-lg font-display font-bold text-slate-400">
+                Awaiting Genomic Data
+              </h3>
+              <p class="text-sm text-slate-400 text-center max-w-sm mt-2">
+                Upload a sequence and select target medications to view
+                integrity metrics and molecular mapping.
+              </p>
             </div>
-            
           </div>
-          
         </div>
       </main>
-      
+
       <!-- Hidden JSON Panel to preserve JS -->
       <div id="json-panel" class="hidden">
         <button id="copy-json"></button>
@@ -330,57 +656,77 @@
         <button id="refresh-json"></button>
         <pre id="json-output"></pre>
       </div>
-
     </div>
 
     <!-- The exact script reference from original, with cache buster -->
     <script src="{{ url_for('static', filename='js/app.js') }}?v=2.0"></script>
-    
+
     <!-- Inline script to handle file name display, standard tabs visual logic that was added -->
     <script>
       // Make sure the empty state hides when results are shown
       const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
-          if (mutation.target.id === 'results-container') {
-            const emptyState = document.getElementById('empty-state');
+          if (mutation.target.id === "results-container") {
+            const emptyState = document.getElementById("empty-state");
             if (emptyState) {
-                if (mutation.target.classList.contains('hidden')) {
-                    emptyState.classList.remove('hidden');
-                } else {
-                    emptyState.classList.add('hidden');
-                }
+              if (mutation.target.classList.contains("hidden")) {
+                emptyState.classList.remove("hidden");
+              } else {
+                emptyState.classList.add("hidden");
+              }
             }
           }
         });
       });
-      const resultsContainer = document.getElementById('results-container');
+      const resultsContainer = document.getElementById("results-container");
       if (resultsContainer) {
-          observer.observe(resultsContainer, { attributes: true, attributeFilter: ['class'] });
+        observer.observe(resultsContainer, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
       }
 
       // Tab visual handling
-      document.querySelectorAll('.tab-button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active', 'text-slate-800'));
-          document.querySelectorAll('.tab-button').forEach(b => b.classList.add('text-slate-500'));
-          e.target.classList.add('active', 'text-slate-800');
-          e.target.classList.remove('text-slate-500');
-          
-          const tabId = e.target.getAttribute('data-tab');
-          document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-          document.getElementById('tab-' + tabId).classList.remove('hidden');
+      document.querySelectorAll(".tab-button").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          document
+            .querySelectorAll(".tab-button")
+            .forEach((b) => b.classList.remove("active", "text-slate-800"));
+          document
+            .querySelectorAll(".tab-button")
+            .forEach((b) => b.classList.add("text-slate-500"));
+          e.target.classList.add("active", "text-slate-800");
+          e.target.classList.remove("text-slate-500");
+
+          const tabId = e.target.getAttribute("data-tab");
+          document
+            .querySelectorAll(".tab-content")
+            .forEach((c) => c.classList.add("hidden"));
+          document.getElementById("tab-" + tabId).classList.remove("hidden");
         });
       });
 
       // Show filename on upload
-      const vcfInput = document.getElementById('vcf-file-input');
-      vcfInput.addEventListener('change', (e) => {
-        if(e.target.files.length > 0) {
-           document.getElementById('vcf-filename-display').innerText = e.target.files[0].name;
-           document.getElementById('vcf-success').classList.remove('hidden');
-           document.getElementById('dropzone').classList.add('border-emerald-500', 'bg-emerald-50/30');
-        }
-      });
+      const vcfInput = document.getElementById("vcf-file-input");
+      if (vcfInput) {
+        vcfInput.addEventListener("change", (e) => {
+          if (e.target.files.length > 0) {
+            const filenameDisplay = document.getElementById(
+              "vcf-filename-display",
+            );
+            const successEl = document.getElementById("vcf-success");
+            const dropzoneEl = document.getElementById("dropzone");
+            if (filenameDisplay)
+              filenameDisplay.innerText = e.target.files[0].name;
+            if (successEl) successEl.classList.remove("hidden");
+            if (dropzoneEl)
+              dropzoneEl.classList.add(
+                "border-emerald-500",
+                "bg-emerald-50/30",
+              );
+          }
+        });
+      }
     </script>
   </body>
 </html>

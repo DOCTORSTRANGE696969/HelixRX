@@ -1,0 +1,25 @@
+##fileformat=VCFv4.2
+##fileDate=20260426
+##source=Clinical_Standard_Template_Normal
+##reference=GRCh38
+##contig=<ID=chr10,length=133797422>
+##contig=<ID=chr12,length=133275309>
+##INFO=<ID=GENE,Number=1,Type=String,Description="Gene name">
+##INFO=<ID=gene,Number=1,Type=String,Description="Gene name lowercase">
+##INFO=<ID=RSID,Number=1,Type=String,Description="dbSNP rsID">
+##INFO=<ID=rsid,Number=1,Type=String,Description="dbSNP rsID lowercase">
+##INFO=<ID=STAR_ALLELE,Number=1,Type=String,Description="Star allele diplotype">
+##INFO=<ID=star_allele,Number=1,Type=String,Description="Star allele diplotype lowercase">
+##INFO=<ID=DIPLOTYPE,Number=1,Type=String,Description="Full diplotype call">
+##INFO=<ID=diplotype,Number=1,Type=String,Description="Full diplotype call lowercase">
+##INFO=<ID=PHENOTYPE,Number=1,Type=String,Description="Predicted phenotype">
+##INFO=<ID=phenotype,Number=1,Type=String,Description="Predicted phenotype lowercase">
+##INFO=<ID=FUNCTION,Number=1,Type=String,Description="Functional consequence">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read depth">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype quality">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NORMAL_PATIENT
+chr10	94781859	rs4244285	G	A	60	PASS	GENE=CYP2C19;gene=CYP2C19;RSID=rs4244285;rsid=rs4244285;STAR_ALLELE=*1;star_allele=*1;DIPLOTYPE=*1/*1;diplotype=*1/*1;PHENOTYPE=Normal_Metabolizer;phenotype=Normal_Metabolizer;FUNCTION=normal_function	GT:DP:GQ:AD	0/0:50:99:50,0
+chr10	96741053	rs1057910	A	C	60	PASS	GENE=CYP2C9;gene=CYP2C9;RSID=rs1057910;rsid=rs1057910;STAR_ALLELE=*1;star_allele=*1;DIPLOTYPE=*1/*1;diplotype=*1/*1;PHENOTYPE=Normal_Metabolizer;phenotype=Normal_Metabolizer;FUNCTION=normal_function	GT:DP:GQ:AD	0/0:50:99:50,0
+chr12	21331549	rs4149056	T	C	60	PASS	GENE=SLCO1B1;gene=SLCO1B1;RSID=rs4149056;rsid=rs4149056;STAR_ALLELE=*1a;star_allele=*1a;DIPLOTYPE=*1a/*1a;diplotype=*1a/*1a;PHENOTYPE=Normal_Function;phenotype=Normal_Function;FUNCTION=normal_function	GT:DP:GQ:AD	0/0:50:99:50,0

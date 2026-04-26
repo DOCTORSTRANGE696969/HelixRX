@@ -13,11 +13,49 @@ from datetime import datetime
 import json
 import time
 import uuid
+from io import BytesIO
+import re
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
+
+
+def archive_vcf_upload(file_bytes, original_filename, request_id):
+    """Best-effort archival of uploaded VCFs to Cloud Storage/Firebase Storage."""
+    enabled = os.getenv("ENABLE_VCF_ARCHIVE", "false").lower() in ["1", "true", "yes"]
+    if not enabled:
+        return None
+
+    bucket_name = os.getenv("FIREBASE_STORAGE_BUCKET") or os.getenv("GCS_BUCKET")
+    if not bucket_name:
+        print("ℹ VCF archive skipped: FIREBASE_STORAGE_BUCKET/GCS_BUCKET not configured")
+        return None
+
+    safe_name = re.sub(r"[^a-zA-Z0-9._-]", "_", original_filename or "upload.vcf")
+    user_id = request.headers.get("X-User-Id", "anonymous")
+    object_path = f"vcf/{user_id}/{int(time.time() * 1000)}-{request_id[:8]}-{safe_name}"
+
+    try:
+        from google.cloud import storage
+
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(object_path)
+        blob.upload_from_string(file_bytes, content_type="text/plain")
+        blob.metadata = {
+            "original_name": original_filename or "",
+            "request_id": request_id,
+            "uploaded_at": datetime.utcnow().isoformat() + "Z",
+        }
+        blob.patch()
+        print(f"✓ Archived VCF upload to gs://{bucket_name}/{object_path}")
+        return object_path
+    except Exception as e:
+        # Archival should never block API responses.
+        print(f"⚠ VCF archive error: {e}")
+        return None
 
 # Set maximum file upload size to 5MB
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB in bytes
@@ -179,7 +217,7 @@ def analyze():
                     phenotype=phenotype_result.get('phenotype'),
                     diplotype=phenotype_result.get('diplotype'),
                     cpic_level=match_result.get('cpic_level'),
-                    variants=gene_variants,
+                    variant_count=variant_count,
                     guideline_url=match_result.get('guideline_url'),
                     risk_assessment=json_response.get('risk_assessment') if json_response else None
                 )
@@ -302,8 +340,22 @@ def api_analysis():
             )
             return jsonify({"error": "No drugs provided"}), 400
         
-        # Parse VCF file
-        vcf_data = parse_vcf(vcf_file)
+        # Read once so we can both archive and parse deterministically.
+        vcf_file_bytes = vcf_file.read()
+        if not vcf_file_bytes:
+            log_api_metadata(
+                status="validation_error",
+                http_status=400,
+                error_message="Uploaded VCF file is empty",
+                request_metadata={"filename": vcf_file.filename}
+            )
+            return jsonify({"error": "Uploaded VCF file is empty"}), 400
+
+        archived_object_path = archive_vcf_upload(vcf_file_bytes, vcf_file.filename, request_id)
+
+        # Parse VCF file from in-memory bytes.
+        parse_stream = BytesIO(vcf_file_bytes)
+        vcf_data = parse_vcf(parse_stream)
         print(f"VCF Parse Result: {vcf_data.get('vcf_parsing_success')}")
         
         if not vcf_data.get('vcf_parsing_success'):
@@ -313,7 +365,8 @@ def api_analysis():
                 error_message=vcf_data.get('error', 'Unknown error'),
                 request_metadata={
                     "filename": vcf_file.filename,
-                    "drugs_input": drugs_input
+                    "drugs_input": drugs_input,
+                    "archived_object_path": archived_object_path
                 }
             )
             return jsonify({
@@ -366,7 +419,7 @@ def api_analysis():
                             phenotype=phenotype_result.get('phenotype'),
                             diplotype=phenotype_result.get('diplotype'),
                             cpic_level=match_result.get('cpic_level'),
-                            variants=gene_variants,
+                            variant_count=len(gene_variants),
                             guideline_url=match_result.get('guideline_url'),
                             risk_assessment=None
                         )
@@ -488,7 +541,8 @@ Remember: Write for a patient with no medical background. Be supportive, encoura
                 "filename": vcf_file.filename,
                 "drugs_input": drugs_input,
                 "variant_gene_count": len(vcf_data.get('variants', {})),
-                "vcf_parsing_success": bool(vcf_data.get('vcf_parsing_success'))
+                "vcf_parsing_success": bool(vcf_data.get('vcf_parsing_success')),
+                "archived_object_path": archived_object_path
             }
         )
 

@@ -1,3 +1,6 @@
+import hashlib
+import os
+
 def parse_vcf(file) -> dict:
     """
     Parse a VCF v4.2 file and extract pharmacogenomic variants.
@@ -32,6 +35,11 @@ def parse_vcf(file) -> dict:
         "TPMT",
         "DPYD"
     }
+
+    # INFO tag aliases seen across VCF pipelines
+    GENE_TAG_ALIASES = ["GENE", "gene", "Gene"]
+    RSID_TAG_ALIASES = ["RS", "rs", "RSID", "rsid", "DBSNP", "dbsnp"]
+    STAR_TAG_ALIASES = ["STAR", "star", "STAR_ALLELE", "star_allele", "ALLELE", "allele"]
     
     # Result structure
     result = {
@@ -90,7 +98,11 @@ def parse_vcf(file) -> dict:
                 has_column_header = True
                 header_fields = line.split('\t')
                 if len(header_fields) > 9:
-                    result["patient_id"] = header_fields[9].strip()
+                    raw_id = header_fields[9].strip()
+                    # Apply one-way SHA-256 Pseudonymization
+                    salt = os.getenv("PATIENT_SALT", "default_helix_salt").encode('utf-8')
+                    hashed_id = hashlib.sha256(raw_id.encode('utf-8') + salt).hexdigest()
+                    result["patient_id"] = f"ANON-{hashed_id[:12].upper()}"
                 continue
             
             # Skip other metadata lines
@@ -121,19 +133,39 @@ def parse_vcf(file) -> dict:
                     else:
                         info_dict[info_pair] = True
                 
-                # Extract required fields
-                gene = info_dict.get("GENE", "").upper()
-                rsid = info_dict.get("RS", "")
-                star = info_dict.get("STAR", "")
+                # Extract required fields using common alias tags.
+                gene = ""
+                for tag in GENE_TAG_ALIASES:
+                    value = info_dict.get(tag)
+                    if value:
+                        gene = str(value).upper()
+                        break
 
-                # Skip reference-only genotypes when possible
+                rsid = ""
+                for tag in RSID_TAG_ALIASES:
+                    value = info_dict.get(tag)
+                    if value:
+                        rsid = str(value)
+                        break
+                if not rsid:
+                    vcf_id = fields[2] if len(fields) > 2 else ""
+                    if vcf_id.startswith("rs"):
+                        rsid = vcf_id
+
+                star = ""
+                for tag in STAR_TAG_ALIASES:
+                    value = info_dict.get(tag)
+                    if value:
+                        star = str(value)
+                        break
+
+                # Parse genotype and keep reference-only calls as explicit entries.
+                genotype = None
                 if format_field and sample_field:
                     format_keys = format_field.split(':')
                     sample_values = sample_field.split(':')
                     format_map = dict(zip(format_keys, sample_values))
                     genotype = format_map.get("GT")
-                    if genotype and genotype in {"0/0", "0|0"}:
-                        continue
                 
                 # Only process if gene is supported
                 if gene not in SUPPORTED_GENES:
@@ -147,6 +179,11 @@ def parse_vcf(file) -> dict:
                 
                 if star:
                     variant["star"] = star
+
+                if genotype:
+                    variant["genotype"] = genotype
+                    if genotype in {"0/0", "0|0"}:
+                        variant["is_reference"] = True
                 
                 # Only add if we have at least rsid or star
                 if variant:
@@ -175,8 +212,7 @@ def parse_vcf(file) -> dict:
             return result
         
         if total_variants_found == 0:
-            result["error"] = "No pharmacogenomic variants found in VCF file for supported genes (CYP2D6, CYP2C19, CYP2C9, SLCO1B1, TPMT, DPYD)"
-            return result
+            result["note"] = "No supported pharmacogenomic entries detected in this file"
         
         result["vcf_parsing_success"] = True
         
